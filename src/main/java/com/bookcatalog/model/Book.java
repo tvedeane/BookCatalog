@@ -1,9 +1,8 @@
 package com.bookcatalog.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -14,6 +13,10 @@ public class Book {
     private String isbn;
     private String title;
     private byte[] picture;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "BOOK_ID")
+    private List<Filename> filenames = new ArrayList<>();
 
     public Long getBook_id() {
         return book_id;
@@ -45,5 +48,13 @@ public class Book {
 
     public void setPicture(byte[] picture) {
         this.picture = picture;
+    }
+
+    public List<Filename> getFilenames() {
+        return filenames;
+    }
+
+    public void setFilenames(List<Filename> filenames) {
+        this.filenames = filenames;
     }
 }
