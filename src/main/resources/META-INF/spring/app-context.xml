@@ -18,7 +18,7 @@
         <property name="password" value="sa" />
     </bean>
 
-    <jdbc:initialize-database data-source="dataSource" ignore-failures="NONE">
+    <jdbc:initialize-database data-source="dataSource" ignore-failures="DROPS">
         <jdbc:script location="classpath:db/insert.sql" />
     </jdbc:initialize-database>
 
