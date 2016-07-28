@@ -8,6 +8,8 @@
 
         <class>com.bookcatalog.model.Book</class>
         <class>com.bookcatalog.model.Filename</class>
+        <class>com.bookcatalog.model.Author</class>
+        <class>com.bookcatalog.model.Category</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
     </persistence-unit>

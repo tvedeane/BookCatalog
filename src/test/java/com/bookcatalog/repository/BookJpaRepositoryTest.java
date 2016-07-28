@@ -37,4 +37,22 @@ public class BookJpaRepositoryTest {
         assertEquals(1, book.getFilenames().size());
         assertEquals("ThinkingInJava4thEd.pdf", book.getFilenames().get(0).getName());
     }
+
+    @Test
+    @Transactional
+    public void testBookWithCategories() {
+        Book book = bookJpaRepository.findOne(1L);
+
+        assertNotNull(book);
+        assertEquals(3, book.getCategories().size());
+    }
+
+    @Test
+    @Transactional
+    public void testBookWithAuthors() {
+        Book book = bookJpaRepository.findOne(1L);
+
+        assertNotNull(book.getAuthors());
+        assertEquals("Bruce Eckel", book.getAuthors().get(0).getName());
+    }
 }
