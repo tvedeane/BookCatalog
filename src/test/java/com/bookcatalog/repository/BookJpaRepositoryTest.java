@@ -55,4 +55,11 @@ public class BookJpaRepositoryTest {
         assertNotNull(book.getAuthors());
         assertEquals("Bruce Eckel", book.getAuthors().get(0).getName());
     }
+
+    @Test
+    public void testFindWithLike() {
+        List<Book> books = bookJpaRepository.findByTitleLike("%Java%");
+
+        assertEquals(3, books.size());
+    }
 }
