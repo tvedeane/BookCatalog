@@ -10,6 +10,10 @@
     <packaging>jar</packaging>
     <name>Simple book catalog</name>
 
+    <scm>
+        <url>scm:git:git@github.com:marekjeszka/BookCatalog.git</url>
+    </scm>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
