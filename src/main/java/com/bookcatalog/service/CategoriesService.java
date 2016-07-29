@@ -1,5 +1,9 @@
 package com.bookcatalog.service;
 
-public interface CategoriesService {
+import com.bookcatalog.model.Category;
 
+import java.util.List;
+
+public interface CategoriesService {
+    List<Category> findAll();
 }
