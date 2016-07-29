@@ -21,4 +21,23 @@ public class BooksServiceImpl implements BooksService {
     public Book findOne(Long book_id) {
         return bookJpaRepository.findOne(book_id);
     }
+
+    @Override
+    public List<Book> findByTitleLike(String bookTitle) {
+        return bookJpaRepository.findByTitleLikeIgnoreCase(like(bookTitle));
+    }
+
+    @Override
+    public List<Book> findByCategoryNameLike(String categoryName) {
+        return bookJpaRepository.findByCategoriesNameLikeIgnoreCase(like(categoryName));
+    }
+
+    @Override
+    public List<Book> findByFilenameLike(String filename) {
+        return bookJpaRepository.findByFilenamesNameLikeIgnoreCase(like(filename));
+    }
+
+    private String like(String categoryName) {
+        return "%" + categoryName + "%";
+    }
 }

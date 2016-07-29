@@ -2,7 +2,6 @@ package com.bookcatalog.repository;
 
 import com.bookcatalog.BookCatalogApp;
 import com.bookcatalog.model.Book;
-import org.hibernate.LazyInitializationException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 @SpringApplicationConfiguration(BookCatalogApp.class)
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -60,9 +58,16 @@ public class BookJpaRepositoryTest {
     }
 
     @Test
-    public void testFindWithLike() {
-        List<Book> books = bookJpaRepository.findByTitleLike("%Java%");
+    public void testFindWithTitleLike() {
+        List<Book> books = bookJpaRepository.findByTitleLikeIgnoreCase("%java%");
 
         assertEquals(3, books.size());
+    }
+
+    @Test
+    public void testFindWithCategoryLike() {
+        List<Book> books = bookJpaRepository.findByCategoriesNameLikeIgnoreCase("%Programming%");
+
+        assertEquals(1, books.size());
     }
 }

@@ -10,6 +10,7 @@ import com.bookcatalog.service.CategoriesService;
 import com.bookcatalog.service.FilenamesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -50,5 +51,23 @@ public class RestController {
     @ResponseBody
     public List<Filename> getAllFilenames() {
         return filenamesService.findAll();
+    }
+
+    @RequestMapping("/book/title/{title}")
+    @ResponseBody
+    public List<Book> getAllBooksWithTitleLike(@PathVariable String title) {
+        return booksService.findByTitleLike(title);
+    }
+
+    @RequestMapping("/book/category/{name}")
+    @ResponseBody
+    public List<Book> getAllBooksWithCategoryNameLike(@PathVariable String name) {
+        return booksService.findByCategoryNameLike(name);
+    }
+
+    @RequestMapping("/book/filename/{name}")
+    @ResponseBody
+    public List<Book> getAllBooksWithFilenameLike(@PathVariable String name) {
+        return booksService.findByFilenameLike(name);
     }
 }

@@ -8,4 +8,10 @@ public interface BooksService {
     List<Book> findAll();
 
     Book findOne(Long book_id);
+
+    List<Book> findByTitleLike(String bookTitle);
+
+    List<Book> findByCategoryNameLike(String categoryName);
+
+    List<Book> findByFilenameLike(String filename);
 }
