@@ -9,6 +9,7 @@
     <version>0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Simple book catalog</name>
+    <description>Exercise: to create book catalog (DB, backend, REST API, simple web page)</description>
 
     <scm>
         <url>scm:git:git@github.com:marekjeszka/BookCatalog.git</url>
