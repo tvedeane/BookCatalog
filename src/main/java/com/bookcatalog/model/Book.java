@@ -1,10 +1,14 @@
 package com.bookcatalog.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "book_id")
 public class Book {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

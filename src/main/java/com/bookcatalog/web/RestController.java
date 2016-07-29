@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
+@RequestMapping("/api")
 public class RestController {
 
     @Autowired
@@ -20,7 +21,7 @@ public class RestController {
 
     @RequestMapping("/books")
     @ResponseBody
-    public List<Book> getBooksSummary() {
-        return null;
+    public List<Book> getAllBooks() {
+        return booksService.findAll();
     }
 }
