@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Book Catalog - book details</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+
+<body>
+<div class="container">
+    <h3>Book details:</h3>
+    <p>ISBN: <strong th:text="${book.isbn}">?</strong></p>
+    <p>Title: <strong th:text="${book.title}">?</strong></p>
+    <p>Authors: <span th:include="::listNameFromItems (${book.authors})">?</span></p>
+    <p>Categories: <span th:include="::listNameFromItems (${book.categories})">?</span></p>
+    <p>Filenames: <span th:include="::listNameFromItems (${book.filenames})">?</span></p>
+    <p>
+        <a href="index.html" th:href="@{/index}">Back</a>
+    </p>
+
+    <div th:fragment="listNameFromItems (list)">
+        <span th:each="item, row: ${list}">
+            <span th:if="${row.index} != 0">and</span>
+            <strong th:text="${item.name}">?</strong>
+        </span>
+    </div>
+</div>
+</body>
+</html>
