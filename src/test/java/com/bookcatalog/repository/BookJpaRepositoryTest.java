@@ -2,6 +2,7 @@ package com.bookcatalog.repository;
 
 import com.bookcatalog.BookCatalogApp;
 import com.bookcatalog.model.Book;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -69,5 +73,19 @@ public class BookJpaRepositoryTest {
         List<Book> books = bookJpaRepository.findByCategoriesNameLikeIgnoreCase("%Programming%");
 
         assertEquals(1, books.size());
+    }
+
+    @Test
+    public void testAddPicture() throws IOException {
+        Book book = bookJpaRepository.findOne(1L);
+        URL resource = getClass().getClassLoader().getResource("ThinkingInJava.png");
+        assertNotNull("Missing resources for tests", resource);
+        File file = new File(resource.getFile());
+
+        byte[] picture = IOUtils.toByteArray(file.toURI());
+        book.setPicture(picture);
+
+        Book book1 = bookJpaRepository.saveAndFlush(book);
+        assertNotNull(book1.getPicture());
     }
 }
