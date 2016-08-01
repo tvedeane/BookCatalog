@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,15 +34,23 @@ public class RestControllerTest {
     public void getAllBooks() throws Exception {
         this.mockMvc.perform(get("/api/books"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].title").value("Thinking in Java (4th Edition)"));
+    }
+
+    @Test
+    public void getOneBook() throws Exception {
+        this.mockMvc.perform(get("/api/book/3"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.title").value("Java Puzzlers: Traps, Pitfalls, and Corner Cases"));
     }
 
     @Test
     public void getAllAuthors() throws Exception {
         this.mockMvc.perform(get("/api/authors"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].name").value("Bruce Eckel"));
     }
 
@@ -49,7 +58,7 @@ public class RestControllerTest {
     public void getAllCategories() throws Exception {
         this.mockMvc.perform(get("/api/categories"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].name").value("Software"));
     }
 
@@ -57,7 +66,7 @@ public class RestControllerTest {
     public void getAllFilenames() throws Exception {
         this.mockMvc.perform(get("/api/filenames"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].name").value("ThinkingInJava4thEd.pdf"));
     }
 
@@ -65,7 +74,7 @@ public class RestControllerTest {
     public void getAllBooksWithTitleLike() throws Exception {
         this.mockMvc.perform(get("/api/book/title/Java"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].title").value("Thinking in Java (4th Edition)"));
     }
 
@@ -73,7 +82,7 @@ public class RestControllerTest {
     public void getAllBooksWithCategoryNameLike() throws Exception {
         this.mockMvc.perform(get("/api/book/category/Language"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].title").value("Thinking in Java (4th Edition)"));
     }
 
@@ -81,7 +90,7 @@ public class RestControllerTest {
     public void getAllBooksWithFilenameLike() throws Exception {
         this.mockMvc.perform(get("/api/book/filename/pdf"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$[0].title").value("Thinking in Java (4th Edition)"));
     }
 }

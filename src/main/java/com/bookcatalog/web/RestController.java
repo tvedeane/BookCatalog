@@ -53,21 +53,27 @@ public class RestController {
         return filenamesService.findAll();
     }
 
+    @RequestMapping("/book/{id}")
+    @ResponseBody
+    public Book getBookById(@PathVariable String id) {
+        return booksService.findOne(Long.valueOf(id));
+    }
+
     @RequestMapping("/book/title/{title}")
     @ResponseBody
-    public List<Book> getAllBooksWithTitleLike(@PathVariable String title) {
+    public List<Book> findBooksWithTitleLike(@PathVariable String title) {
         return booksService.findByTitleLike(title);
     }
 
     @RequestMapping("/book/category/{name}")
     @ResponseBody
-    public List<Book> getAllBooksWithCategoryNameLike(@PathVariable String name) {
+    public List<Book> findBooksWithCategoryNameLike(@PathVariable String name) {
         return booksService.findByCategoryNameLike(name);
     }
 
     @RequestMapping("/book/filename/{name}")
     @ResponseBody
-    public List<Book> getAllBooksWithFilenameLike(@PathVariable String name) {
+    public List<Book> findBooksWithFilenameLike(@PathVariable String name) {
         return booksService.findByFilenameLike(name);
     }
 }
