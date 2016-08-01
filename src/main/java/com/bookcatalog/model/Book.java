@@ -18,6 +18,13 @@ public class Book {
     private String title;
     private byte[] picture;
 
+    public Book() {}
+
+    public Book(String isbn, String title) {
+        this.isbn = isbn;
+        this.title = title;
+    }
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "BOOK_ID")
     private List<Filename> filenames = new ArrayList<>();

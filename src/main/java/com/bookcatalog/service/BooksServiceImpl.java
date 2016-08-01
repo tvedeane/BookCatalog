@@ -37,6 +37,11 @@ public class BooksServiceImpl implements BooksService {
         return bookJpaRepository.findByFilenamesNameLikeIgnoreCase(like(filename));
     }
 
+    @Override
+    public Book saveBook(Book book) {
+        return bookJpaRepository.saveAndFlush(book);
+    }
+
     private String like(String categoryName) {
         return "%" + categoryName + "%";
     }

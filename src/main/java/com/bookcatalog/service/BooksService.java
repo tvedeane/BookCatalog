@@ -14,4 +14,6 @@ public interface BooksService {
     List<Book> findByCategoryNameLike(String categoryName);
 
     List<Book> findByFilenameLike(String filename);
+
+    Book saveBook(Book book);
 }
