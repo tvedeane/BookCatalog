@@ -26,6 +26,17 @@ public class WebController {
     @Autowired
     private BooksService booksService;
 
+    @RequestMapping("/login")
+    String login() {
+        return "login";
+    }
+
+    @RequestMapping("/login-error")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
+    }
+
     @RequestMapping(value = {"/", "/index"})
     String index(Model model) {
         model.addAttribute("time", LocalDateTime.now());
