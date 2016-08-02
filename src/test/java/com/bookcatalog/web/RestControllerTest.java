@@ -8,8 +8,7 @@ import org.springframework.http.MediaType;
 
 import java.util.Collections;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class RestControllerTest extends AbstractJsonTest {
@@ -89,5 +88,38 @@ public class RestControllerTest extends AbstractJsonTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(jsonPath("$.title").value(title));
+    }
+
+    @Test
+    public void editBook() throws Exception {
+        Book book = new Book("0785342336788", "Java Puzzlers: Traps, Pitfalls, and Corner Cases");
+        book.setBook_id(3L);
+
+        this.mockMvc.perform(put("/api/book")
+                .content(this.json(book))
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isNoContent());
+    }
+
+    @Test
+    public void editBookWithoutId() throws Exception {
+        Book book = new Book("0785342336788", "Java Puzzlers: Traps, Pitfalls, and Corner Cases");
+
+        this.mockMvc.perform(put("/api/book")
+                .content(this.json(book))
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void editBookWithoutTitle() throws Exception {
+        Book book = new Book("0785342336788", "Java Puzzlers: Traps, Pitfalls, and Corner Cases");
+        book.setBook_id(3L);
+        book.setTitle(null);
+
+        this.mockMvc.perform(put("/api/book")
+                .content(this.json(book))
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(status().isBadRequest());
     }
 }

@@ -1,7 +1,6 @@
 package com.bookcatalog.web;
 
 import com.bookcatalog.BookCatalogApp;
-import com.bookcatalog.model.Book;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;

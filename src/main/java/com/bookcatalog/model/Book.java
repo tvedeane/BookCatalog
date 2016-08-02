@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,19 +26,19 @@ public class Book {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "BOOK_ID")
-    private List<Filename> filenames = new ArrayList<>();
+    private List<Filename> filenames;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "BOOK_CATEGORY",
                joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"),
                inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id"))
-    private List<Category> categories = new ArrayList<>();
+    private List<Category> categories;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "BOOK_AUTHOR",
                joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"),
                inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "author_id"))
-    private List<Author> authors = new ArrayList<>();
+    private List<Author> authors;
 
     public Long getBook_id() {
         return book_id;
