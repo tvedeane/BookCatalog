@@ -1,9 +1,12 @@
 package com.bookcatalog.model;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Data
 public class Author {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -17,22 +20,6 @@ public class Author {
     public Author() {}
 
     public Author(String name) {
-        this.name = name;
-    }
-
-    public Long getAuthor_id() {
-        return author_id;
-    }
-
-    public void setAuthor_id(Long author_id) {
-        this.author_id = author_id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 }

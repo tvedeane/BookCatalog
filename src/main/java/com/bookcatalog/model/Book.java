@@ -2,12 +2,14 @@ package com.bookcatalog.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "book_id")
+@Data
 public class Book {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -39,60 +41,4 @@ public class Book {
                joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"),
                inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "author_id"))
     private List<Author> authors;
-
-    public Long getBook_id() {
-        return book_id;
-    }
-
-    public void setBook_id(Long book_id) {
-        this.book_id = book_id;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public byte[] getPicture() {
-        return picture;
-    }
-
-    public void setPicture(byte[] picture) {
-        this.picture = picture;
-    }
-
-    public List<Filename> getFilenames() {
-        return filenames;
-    }
-
-    public void setFilenames(List<Filename> filenames) {
-        this.filenames = filenames;
-    }
-
-    public List<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Category> categories) {
-        this.categories = categories;
-    }
-
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
-    }
 }
