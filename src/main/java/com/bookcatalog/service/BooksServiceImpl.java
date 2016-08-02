@@ -3,6 +3,7 @@ package com.bookcatalog.service;
 import com.bookcatalog.model.Book;
 import com.bookcatalog.repository.BookJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -40,6 +41,11 @@ public class BooksServiceImpl implements BooksService {
     @Override
     public Book saveBook(Book book) {
         return bookJpaRepository.saveAndFlush(book);
+    }
+
+    @Override
+    public void deleteBook(Long id) throws DataAccessException {
+        bookJpaRepository.delete(id);
     }
 
     private String like(String categoryName) {

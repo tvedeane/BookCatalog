@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
@@ -88,6 +89,17 @@ public class RestController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("");
+    }
+
+    @RequestMapping(value = "/book/{id}", method = DELETE)
+    @ResponseBody
+    public ResponseEntity<Void> deleteBook(@PathVariable String id) {
+        try {
+            booksService.deleteBook(Long.valueOf(id));
+        } catch (DataAccessException | NumberFormatException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @RequestMapping("/book/title/{title}")

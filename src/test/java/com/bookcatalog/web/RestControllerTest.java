@@ -122,4 +122,14 @@ public class RestControllerTest extends AbstractJsonTest {
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void deleteBook() throws Exception {
+        this.mockMvc.perform(delete("/api/book/3")).andExpect(status().isOk());
+    }
+
+    @Test
+    public void deleteBookDontExist() throws Exception {
+        this.mockMvc.perform(delete("/api/book/10")).andExpect(status().isNotFound());
+    }
 }
