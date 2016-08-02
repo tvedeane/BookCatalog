@@ -9,13 +9,17 @@
 <body>
 <div class="container">
     <h3>Book details:</h3>
+    <p><img th:src="@{/picture(book_id=${book.book_id})}" src=""/></p>
     <p>ISBN: <strong th:text="${book.isbn}">?</strong></p>
     <p>Title: <strong th:text="${book.title}">?</strong></p>
     <p>Authors: <span th:include="::listNameFromItems (${book.authors})">?</span></p>
     <p>Categories: <span th:include="::listNameFromItems (${book.categories})">?</span></p>
     <p>Filenames: <span th:include="::listNameFromItems (${book.filenames})">?</span></p>
     <p>
-        <a href="index.html" th:href="@{/index}">Back</a>
+        <a href="edit.html" th:href="@{/edit(book_id=${book.book_id})}">Edit</a>
+    </p>
+    <p>
+        <a href="index.html" th:href="@{/index}">Main page</a>
     </p>
 
     <div th:fragment="listNameFromItems (list)">

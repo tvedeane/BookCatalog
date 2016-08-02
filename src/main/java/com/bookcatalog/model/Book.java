@@ -33,13 +33,13 @@ public class Book {
     @JoinTable(name = "BOOK_CATEGORY",
                joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"),
                inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id"))
-    private List<Category> categories;
+    private List<Category> categories = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "BOOK_AUTHOR",
                joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"),
                inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "author_id"))
-    private List<Author> authors;
+    private List<Author> authors = new ArrayList<>();
 
     public Long getBook_id() {
         return book_id;

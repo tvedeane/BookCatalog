@@ -25,6 +25,7 @@
                 <td th:text="${book.isbn}">ISBN</td>
                 <td th:text="${book.title}">TITLE</td>
                 <td><a href="book.html" th:href="@{/book(book_id=${book.book_id})}">INFO</a></td>
+                <td><a href="edit.html" th:href="@{/edit(book_id=${book.book_id})}">EDIT</a></td>
             </tr>
         </tbody>
     </table>
