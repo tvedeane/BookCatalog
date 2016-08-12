@@ -77,7 +77,7 @@ public class RestControllerTest extends AbstractJsonTest {
         newBook.setAuthors(Collections.singletonList(new Author(authorName)));
         newBook.setCategories(Collections.singletonList(new Category(categoryName)));
         this.mockMvc.perform(post("/api/book")
-                .content(this.json(newBook))
+                .content(asJson(newBook))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value(title))
@@ -96,7 +96,7 @@ public class RestControllerTest extends AbstractJsonTest {
         book.setBook_id(3L);
 
         this.mockMvc.perform(put("/api/book")
-                .content(this.json(book))
+                .content(asJson(book))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isNoContent());
     }
@@ -106,7 +106,7 @@ public class RestControllerTest extends AbstractJsonTest {
         Book book = new Book("0785342336788", "Java Puzzlers: Traps, Pitfalls, and Corner Cases");
 
         this.mockMvc.perform(put("/api/book")
-                .content(this.json(book))
+                .content(asJson(book))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest());
     }
@@ -118,7 +118,7 @@ public class RestControllerTest extends AbstractJsonTest {
         book.setTitle(null);
 
         this.mockMvc.perform(put("/api/book")
-                .content(this.json(book))
+                .content(asJson(book))
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .andExpect(status().isBadRequest());
     }

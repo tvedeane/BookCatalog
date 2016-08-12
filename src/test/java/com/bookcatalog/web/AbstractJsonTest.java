@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 abstract class AbstractJsonTest {
-    private HttpMessageConverter mappingJackson2HttpMessageConverter;
+    private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
 
     @Autowired
     private WebApplicationContext wac;
@@ -39,16 +39,26 @@ abstract class AbstractJsonTest {
     @Autowired
     void setConverters(HttpMessageConverter<?>[] converters) {
         this.mappingJackson2HttpMessageConverter =
-                Arrays.stream(converters)
-                        .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter).findAny().get();
+                (MappingJackson2HttpMessageConverter) Arrays
+                        .stream(converters)
+                        .filter(hmc -> hmc instanceof MappingJackson2HttpMessageConverter)
+                        .findAny()
+                        .orElseGet(null);
 
         Assert.assertNotNull("the JSON message converter must not be null",
                 this.mappingJackson2HttpMessageConverter);
     }
 
-    String json(Object o) throws IOException {
+    /**
+     * Converts object to JSON.
+     *
+     * @param o object to be converted
+     * @return object interpreted as a UTF-8 string
+     * @throws IOException in case of I/O errors
+     */
+    String asJson(Object o) throws IOException {
         MockHttpOutputMessage mockHttpOutputMessage = new MockHttpOutputMessage();
-        this.mappingJackson2HttpMessageConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
+        mappingJackson2HttpMessageConverter.write(o, MediaType.APPLICATION_JSON, mockHttpOutputMessage);
         return mockHttpOutputMessage.getBodyAsString();
     }
 }
